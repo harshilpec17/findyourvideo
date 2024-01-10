@@ -1,12 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
-const VideoCard = () => {
-  const popularVideo = useSelector((store) => store.video.mostPopularVideo[0]);
-
-  console.log(popularVideo);
-  console.log(parseInt(popularVideo.statistics.viewCount));
-
+const VideoCard = ({ popularVideo }) => {
   function formatNumber(num, precision = 2) {
     const map = [
       { suffix: "T", threshold: 1e12 },
@@ -29,15 +24,15 @@ const VideoCard = () => {
   return (
     <>
       {/* <!-- Video 1 --> */}
-      <div className="col-span-12 sm:col-span-6 md:col-span-3">
+      <div className="col-span-12 sm:col-span-6 md:col-span-3 mr-3 mb-6 w-80">
         <card className="w-full flex flex-col">
           <div className="relative">
             {/* <!-- Image Video --> */}
 
             <img
-              src={popularVideo.snippet.thumbnails.medium}
+              src={popularVideo.snippet.thumbnails.medium.url}
               alt="thumbnail"
-              className="w-96 h-auto"
+              className="w-96 h-auto rounded-xl"
             />
 
             <p className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py">
@@ -45,7 +40,7 @@ const VideoCard = () => {
             </p>
           </div>
 
-          <div className="flex flex-row mt-2 gap-2">
+          <div className="flex flex-row mt-2 gap-2 ">
             {/* <!-- Profile Picture --> */}
 
             {/* <img
@@ -62,8 +57,7 @@ const VideoCard = () => {
 
               <p> {popularVideo.snippet.channelTitle} </p>
               <p className="text-gray-400 text-xs mt-1">
-                {formatNumber(parseInt(popularVideo.statistics.viewCount))} . 3
-                years ago
+                {formatNumber(parseInt(popularVideo.statistics.viewCount))}
               </p>
             </div>
           </div>
