@@ -1,5 +1,4 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
 
 const VideoCard = ({ popularVideo }) => {
   function formatNumber(num, precision = 2) {

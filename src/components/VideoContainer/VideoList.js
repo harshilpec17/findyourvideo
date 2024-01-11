@@ -11,7 +11,7 @@ const VideoList = () => {
     <>
       <div className="flex p-3 flex-wrap">
         {video.map((x) => (
-          <Link to={"watch?v=" + x.id}>
+          <Link to={"watch?v=" + x.id} key={x.id}>
             <VideoCard popularVideo={x} />
           </Link>
         ))}

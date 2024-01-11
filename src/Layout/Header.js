@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/Redux/appSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => getSearchResult(), 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
+  const getSearchResult = async () => {
+    const data = await fetch(
+      "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=" +
+        searchQuery
+    );
+    const json = await data.json();
+    const result = json;
+    console.log(result);
+  };
 
   const handleMenu = () => {
     dispatch(toggleMenu());
@@ -25,13 +45,31 @@ const Header = () => {
           ></img>
         </div>
         <div className="col-span-10 text-left ml-10">
-          <input
-            type="text"
-            className="outline-none px-2 py-2 w-1/2 border rounded-l-lg"
-          ></input>
-          <button className="px-8 py-2 border rounded-r-lg outline-none ">
-            Search
-          </button>
+          <div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="outline-none px-2 py-2 w-1/2 border rounded-l-lg"
+            ></input>
+            <button className="px-8 py-2 border rounded-r-lg outline-none ">
+              Search
+            </button>
+          </div>
+          <div className="absolute px-3 py-1 z-50 border bg-white col-span-10 w-[31.5rem] shadow-xl rounded-xl">
+            <ul>
+              <li className="py-1">I phone</li>{" "}
+              <li className="border-t py-1">I phone</li>{" "}
+              <li className="border-t py-1">I phone</li>{" "}
+              <li className="border-t py-1">I phone</li>{" "}
+              <li className="border-t py-1">I phone</li>{" "}
+              <li className="border-t py-1">I phone</li>{" "}
+              <li className="border-t py-1">I phone</li>{" "}
+              <li className="border-t py-1">I phone</li>{" "}
+              <li className="border-t py-1">I phone</li>
+              <li className="border-t py-1">I phone</li>
+            </ul>
+          </div>
         </div>
         <div className="col-span-1 m-auto">
           <img

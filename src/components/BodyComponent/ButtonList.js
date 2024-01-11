@@ -23,8 +23,8 @@ const ButtonList = () => {
   return (
     <>
       <div className="flex my-2 w-screen">
-        {buttonNames.map((buttonName) => (
-          <Button name={buttonName} />
+        {buttonNames.map((buttonName, index) => (
+          <Button name={buttonName} key={index} />
         ))}
       </div>
     </>
