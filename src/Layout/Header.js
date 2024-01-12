@@ -6,6 +6,8 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchSuggestion, setSearchSuggestion] = useState([]);
+  const [showSuggestion, setShowSuggestion] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => getSearchResult(), 200);
@@ -22,15 +24,16 @@ const Header = () => {
     );
     const json = await data.json();
     const result = json;
-    console.log(result);
+    setSearchSuggestion(result[1]);
   };
 
   const handleMenu = () => {
     dispatch(toggleMenu());
   };
+  console.log(searchQuery);
   return (
     <>
-      <div className="grid grid-flow-col p-5 m-2 shadow-lg items-center">
+      <div className="grid grid-flow-col p-5 shadow-lg items-center">
         <div className="flex col-span-1">
           <img
             src="https://cdn.icon-icons.com/icons2/2596/PNG/512/hamburger_button_menu_icon_155296.png"
@@ -50,26 +53,25 @@ const Header = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setShowSuggestion(true)}
+              onBlur={() => setShowSuggestion(false)}
               className="outline-none px-2 py-2 w-1/2 border rounded-l-lg"
             ></input>
             <button className="px-8 py-2 border rounded-r-lg outline-none ">
               Search
             </button>
           </div>
-          <div className="absolute px-3 py-1 z-50 border bg-white col-span-10 w-[31.5rem] shadow-xl rounded-xl">
-            <ul>
-              <li className="py-1">I phone</li>{" "}
-              <li className="border-t py-1">I phone</li>{" "}
-              <li className="border-t py-1">I phone</li>{" "}
-              <li className="border-t py-1">I phone</li>{" "}
-              <li className="border-t py-1">I phone</li>{" "}
-              <li className="border-t py-1">I phone</li>{" "}
-              <li className="border-t py-1">I phone</li>{" "}
-              <li className="border-t py-1">I phone</li>{" "}
-              <li className="border-t py-1">I phone</li>
-              <li className="border-t py-1">I phone</li>
-            </ul>
-          </div>
+          {searchQuery !== "" && showSuggestion && (
+            <div className="absolute px-3 py-1 z-50 border bg-white col-span-10 w-[31.5rem] outline-none shadow-xl rounded-xl">
+              <ul className="-mb-1.5">
+                {searchSuggestion.map((x) => (
+                  <li key={x} className="border-b py-1 cursor-pointer">
+                    {x}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <div className="col-span-1 m-auto">
           <img

@@ -1,6 +1,7 @@
 import React from "react";
 
 const VideoCard = ({ popularVideo }) => {
+  console.log(popularVideo);
   function formatNumber(num, precision = 2) {
     const map = [
       { suffix: "T", threshold: 1e12 },
@@ -20,6 +21,24 @@ const VideoCard = ({ popularVideo }) => {
     return num;
   }
 
+  function extractNumber(str) {
+    const number = str.replace(/\D/g, "");
+    if (str.search((x) => x === "M" && x !== "S")) {
+      let minutes = number.slice(0, 2);
+      let result = minutes + ":" + "00";
+      return result;
+    }
+
+    // let seconds = number.slice(2);
+    // if (number.length < 2) {
+
+    //   return result;
+    // } else {
+    //   let result = minutes + ":" + seconds;
+    //   return result;
+    // }
+  }
+
   return (
     <>
       {/* <!-- Video 1 --> */}
@@ -35,7 +54,7 @@ const VideoCard = ({ popularVideo }) => {
             />
 
             <p className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py">
-              {popularVideo.contentDetails.duration}
+              {extractNumber(popularVideo.contentDetails.duration)}
             </p>
           </div>
 
