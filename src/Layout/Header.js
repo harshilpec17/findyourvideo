@@ -1,16 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/Redux/appSlice";
+import { cacheResult } from "../utils/Redux/searchSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
+
+  const searchInputRef = useRef(null);
+
+  const searchResult = useSelector((store) => store.search.searchResult);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestion, setSearchSuggestion] = useState([]);
   const [showSuggestion, setShowSuggestion] = useState(false);
 
+  const [selectValue, setSelectValue] = useState("");
+
+  let name = "harshil";
+
   useEffect(() => {
-    const timer = setTimeout(() => getSearchResult(), 200);
+    const timer = setTimeout(() => {
+      if (searchResult[searchQuery]) {
+        setSearchSuggestion(searchResult[searchQuery]);
+      } else {
+        getSearchResult();
+      }
+    }, 200);
 
     return () => {
       clearTimeout(timer);
@@ -25,12 +40,23 @@ const Header = () => {
     const json = await data.json();
     const result = json;
     setSearchSuggestion(result[1]);
+
+    dispatch(
+      cacheResult({
+        [searchQuery]: result[1],
+      })
+    );
   };
 
   const handleMenu = () => {
     dispatch(toggleMenu());
   };
-  console.log(searchQuery);
+
+  // const handleSearch = (query) => {
+  //   setSearchQuery(query);
+  //   console.log(searchQuery, "I am handle search");
+  // };
+
   return (
     <>
       <div className="grid grid-flow-col p-5 shadow-lg items-center">
@@ -64,9 +90,14 @@ const Header = () => {
           {searchQuery !== "" && showSuggestion && (
             <div className="absolute px-3 py-1 z-50 border bg-white col-span-10 w-[31.5rem] outline-none shadow-xl rounded-xl">
               <ul className="-mb-1.5">
-                {searchSuggestion.map((x) => (
-                  <li key={x} className="border-b py-1 cursor-pointer">
-                    {x}
+                {searchSuggestion.map((search, index) => (
+                  <li
+                    key={search}
+                    value={search}
+                    onClick={() => setSearchQuery(search)}
+                    className="border-b py-1 cursor-pointer hover:bg-gray-500"
+                  >
+                    {search}
                   </li>
                 ))}
               </ul>
