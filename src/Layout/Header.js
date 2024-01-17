@@ -16,8 +16,6 @@ const Header = () => {
 
   const [selectValue, setSelectValue] = useState("");
 
-  let name = "harshil";
-
   useEffect(() => {
     const timer = setTimeout(() => {
       if (searchResult[searchQuery]) {
@@ -52,10 +50,7 @@ const Header = () => {
     dispatch(toggleMenu());
   };
 
-  // const handleSearch = (query) => {
-  //   setSearchQuery(query);
-  //   console.log(searchQuery, "I am handle search");
-  // };
+  console.log(searchQuery);
 
   return (
     <>
@@ -90,11 +85,10 @@ const Header = () => {
           {searchQuery !== "" && showSuggestion && (
             <div className="absolute px-3 py-1 z-50 border bg-white col-span-10 w-[31.5rem] outline-none shadow-xl rounded-xl">
               <ul className="-mb-1.5">
-                {searchSuggestion.map((search, index) => (
+                {searchSuggestion.map((search) => (
                   <li
                     key={search}
                     value={search}
-                    onClick={() => setSearchQuery(search)}
                     className="border-b py-1 cursor-pointer hover:bg-gray-500"
                   >
                     {search}
