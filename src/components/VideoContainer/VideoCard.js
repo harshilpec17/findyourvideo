@@ -42,7 +42,7 @@ const VideoCard = ({ popularVideo }) => {
   return (
     <>
       {/* <!-- Video 1 --> */}
-      <div className="col-span-12 sm:col-span-6 md:col-span-3 mr-3 mb-6 w-80">
+      <div className="col-span-12 sm:col-span-6 md:col-span-3 ml-3 mb-6 w-80">
         <card className="w-full flex flex-col">
           <div className="relative">
             {/* <!-- Image Video --> */}

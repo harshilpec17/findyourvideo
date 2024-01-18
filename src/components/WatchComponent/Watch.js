@@ -11,7 +11,7 @@ const Watch = () => {
   const [searchParams] = useSearchParams();
 
   const getLiveChatMessage = async () => {
-    const data = await fetch("https://randomuser.me/api/?results=30");
+    const data = await fetch("https://randomuser.me/api/?results=50");
     const json = await data.json();
     const chatData = await json.results;
     setChatData(chatData);
@@ -37,11 +37,11 @@ const Watch = () => {
           <CommentContainer />
         </div>
       </div>
-      <div>
+      <div className="h-[500px] border  overflow-y-scroll ">
         <h1 className="font-bold text-center border-b border-black py-1 text-xl">
           Live Chat
         </h1>
-        <div className="border h-[500px] w-full mx-2 flex flex-col-reverse">
+        <div className="w-full mx-2  flex flex-col-reverse ">
           {chatData && <LiveChat data={chatData} />}
         </div>
       </div>

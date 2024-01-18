@@ -5,11 +5,18 @@ import { Link } from "react-router-dom";
 
 const VideoList = () => {
   const video = useSelector((store) => store.video.mostPopularVideo);
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
 
   if (video === null) return;
   return (
     <>
-      <div className="flex p-3 flex-wrap">
+      <div
+        className={`flex py-3 flex-wrap ${
+          isMenuOpen
+            ? "w-[83%] mx-[17%] justify-between"
+            : "w-[100%] justify-around"
+        } relative `}
+      >
         {video.map((x) => (
           <Link to={"watch?v=" + x.id} key={x.id}>
             <VideoCard popularVideo={x} />

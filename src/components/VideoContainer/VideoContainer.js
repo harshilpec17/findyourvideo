@@ -21,7 +21,7 @@ const VideoContainer = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mx-16">
       <VideoList />
     </div>
   );

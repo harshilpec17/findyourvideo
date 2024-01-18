@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./ButtonListComponent/Button";
+import { useSelector } from "react-redux";
 
 const ButtonList = () => {
   const buttonNames = [
@@ -22,7 +23,7 @@ const ButtonList = () => {
   ];
   return (
     <>
-      <div className="flex my-2 w-screen">
+      <div className="flex my-2 w-screen overflow-x-scroll">
         {buttonNames.map((buttonName, index) => (
           <Button name={buttonName} key={index} />
         ))}

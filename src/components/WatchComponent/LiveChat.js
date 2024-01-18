@@ -69,7 +69,7 @@ const LiveChat = ({ data }) => {
           image: generateImage(),
         })
       );
-    }, 1000);
+    }, 1500);
 
     return () => {
       clearInterval(i);
