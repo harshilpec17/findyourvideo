@@ -4,10 +4,12 @@ import { closeMenu } from "../../utils/Redux/appSlice";
 import { useSearchParams } from "react-router-dom";
 import CommentContainer from "./CommentContainer";
 import LiveChat from "./LiveChat";
+import { addMessage } from "../../utils/Redux/chatSlice";
 
 const Watch = () => {
   const dispatch = useDispatch();
   const [chatData, setChatData] = useState(null);
+  const [myChatMessage, setMyChatMessage] = useState("");
   const [searchParams] = useSearchParams();
 
   const getLiveChatMessage = async () => {
@@ -21,6 +23,7 @@ const Watch = () => {
     dispatch(closeMenu());
     getLiveChatMessage();
   }, []);
+
   return (
     <div className="px-5 py-4 flex w-screen">
       <div>
@@ -37,12 +40,39 @@ const Watch = () => {
           <CommentContainer />
         </div>
       </div>
-      <div className="h-[500px] border  overflow-y-scroll ">
+      <div className="border h-[500px] flex-col">
         <h1 className="font-bold text-center border-b border-black py-1 text-xl">
           Live Chat
         </h1>
-        <div className="w-full mx-2  flex flex-col-reverse ">
-          {chatData && <LiveChat data={chatData} />}
+        <div>{chatData && <LiveChat data={chatData} />}</div>
+        <div className="flex flex-row bg-slate-400">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              dispatch(
+                addMessage({
+                  name: "Harshil",
+                  text: myChatMessage,
+                  image:
+                    "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
+                })
+              );
+              setMyChatMessage("");
+            }}
+          >
+            <input
+              className="border py-2 w-80 px-2 outline-none"
+              type="text"
+              value={myChatMessage}
+              onChange={(e) => setMyChatMessage(e.target.value)}
+            ></input>
+            <button
+              onClick={(e) => e.target.value}
+              className="bg-red-500 px-11 py-2"
+            >
+              ▶️
+            </button>
+          </form>
         </div>
       </div>
     </div>

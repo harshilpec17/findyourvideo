@@ -50,8 +50,6 @@ const Header = () => {
     dispatch(toggleMenu());
   };
 
-  console.log(searchQuery);
-
   return (
     <>
       <div className="grid grid-flow-col p-5 shadow-lg items-center">
