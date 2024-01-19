@@ -79,7 +79,7 @@ const LiveChat = ({ data }) => {
 
   return (
     <>
-      <div className="flex flex-col-reverse overflow-y-scroll h-[420px]">
+      <div className="flex flex-col-reverse">
         {finalMessage !== undefined &&
           finalMessage.map((x) => (
             <ChatMessage image={x.image} text={x.text} name={x.name} />

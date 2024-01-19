@@ -5,6 +5,8 @@ import { useSearchParams } from "react-router-dom";
 import CommentContainer from "./CommentContainer";
 import LiveChat from "./LiveChat";
 import { addMessage } from "../../utils/Redux/chatSlice";
+import { IoSendSharp } from "react-icons/io5";
+import Video from "./Video";
 
 const Watch = () => {
   const dispatch = useDispatch();
@@ -25,57 +27,57 @@ const Watch = () => {
   }, []);
 
   return (
-    <div className="px-5 py-4 flex w-screen">
-      <div>
-        <iframe
-          width="1000"
-          height="500"
-          src={"https://www.youtube.com/embed/" + searchParams.get("v")}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
-        <div className="py-4">
-          <CommentContainer />
+    <>
+      <div className="px-5 py-4 flex justify-between w-screen">
+        <div className="w-[70%]">
+          <Video id={searchParams.get("v")} />
+          <div className="py-4">
+            <CommentContainer />
+          </div>
         </div>
-      </div>
-      <div className="border h-[500px] flex-col">
-        <h1 className="font-bold text-center border-b border-black py-1 text-xl">
-          Live Chat
-        </h1>
-        <div>{chatData && <LiveChat data={chatData} />}</div>
-        <div className="flex flex-row bg-slate-400">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              dispatch(
-                addMessage({
-                  name: "Harshil",
-                  text: myChatMessage,
-                  image:
-                    "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
-                })
-              );
-              setMyChatMessage("");
-            }}
-          >
-            <input
-              className="border py-2 w-80 px-2 outline-none"
-              type="text"
-              value={myChatMessage}
-              onChange={(e) => setMyChatMessage(e.target.value)}
-            ></input>
-            <button
-              onClick={(e) => e.target.value}
-              className="bg-red-500 px-11 py-2"
+
+        <div className="border justify-between flex-col py-1 w-[29%] h-[550px]">
+          <div className="h-[38px]">
+            <h1 className="font-bold text-center border-b border-black py-1 text-xl">
+              Live Chat
+            </h1>
+          </div>
+          <div className="h-[470px]  overflow-y-scroll">
+            <div>{chatData && <LiveChat data={chatData} />}</div>
+          </div>
+          <div className="w-[100%] h-[24px]">
+            <form
+              className="flex flex-row"
+              onSubmit={(e) => {
+                e.preventDefault();
+                dispatch(
+                  addMessage({
+                    name: "Harshil",
+                    text: myChatMessage,
+                    image:
+                      "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
+                  })
+                );
+                setMyChatMessage("");
+              }}
             >
-              ▶️
-            </button>
-          </form>
+              <input
+                className="border-2 border-black p-1 w-full outline-none"
+                type="text"
+                value={myChatMessage}
+                onChange={(e) => setMyChatMessage(e.target.value)}
+              ></input>
+              <button
+                onClick={(e) => e.target.value}
+                className="bg-red-500 border-black border-2 px-10 py-2 outline-none"
+              >
+                <IoSendSharp />
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
