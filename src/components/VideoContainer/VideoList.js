@@ -18,9 +18,11 @@ const VideoList = () => {
         } relative `}
       >
         {video.map((x) => (
-          <Link to={"watch?v=" + x.id} key={x.id}>
-            <VideoCard popularVideo={x} />
-          </Link>
+          <div>
+            <Link to={"watch?v=" + x.id} key={x.id}>
+              <VideoCard popularVideo={x} />
+            </Link>
+          </div>
         ))}
       </div>
     </>

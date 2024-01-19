@@ -1,25 +1,14 @@
 import React from "react";
+import { formatNumber } from "../../utils/helper";
+import { useDispatch } from "react-redux";
+import { addSelectVideo } from "../../utils/Redux/selectedVideoSlice";
 
 const VideoCard = ({ popularVideo }) => {
-  console.log(popularVideo);
-  function formatNumber(num, precision = 2) {
-    const map = [
-      { suffix: "T", threshold: 1e12 },
-      { suffix: "B", threshold: 1e9 },
-      { suffix: "M", threshold: 1e6 },
-      { suffix: "K", threshold: 1e3 },
-      { suffix: "", threshold: 1 },
-    ];
+  const dispatch = useDispatch();
 
-    const found = map.find((x) => Math.abs(num) >= x.threshold);
-    if (found) {
-      const formatted =
-        (num / found.threshold).toFixed(precision) + found.suffix;
-      return formatted;
-    }
-
-    return num;
-  }
+  const handleClick = () => {
+    dispatch(addSelectVideo(popularVideo));
+  };
 
   function extractNumber(str) {
     const number = str.replace(/\D/g, "");
@@ -28,21 +17,15 @@ const VideoCard = ({ popularVideo }) => {
       let result = minutes + ":" + "00";
       return result;
     }
-
-    // let seconds = number.slice(2);
-    // if (number.length < 2) {
-
-    //   return result;
-    // } else {
-    //   let result = minutes + ":" + seconds;
-    //   return result;
-    // }
   }
 
   return (
     <>
       {/* <!-- Video 1 --> */}
-      <div className="col-span-12 sm:col-span-6 md:col-span-3 ml-3 mb-6 w-80">
+      <div
+        onClick={handleClick}
+        className="col-span-12 sm:col-span-6 md:col-span-3 ml-3 mb-6 w-80"
+      >
         <card className="w-full flex flex-col">
           <div className="relative">
             {/* <!-- Image Video --> */}

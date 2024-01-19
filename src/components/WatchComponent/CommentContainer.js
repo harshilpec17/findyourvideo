@@ -158,7 +158,7 @@ const CommentContainer = () => {
   };
   return (
     <>
-      <h1 className="font-bold text-2xl ">Comments : </h1>
+      <h1 className="font-bold text-2xl py-4 ">Comments : </h1>
       <CommentList comments={commentData} />
     </>
   );

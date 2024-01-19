@@ -10,7 +10,6 @@ const LiveChat = ({ data }) => {
 
   const finalMessage = useSelector((store) => store.chat.randomMessage);
 
-  console.log(data);
   const textList = [
     "Great video! Really enjoyed it. 👍",
     "This content is fantastic! 😊",
@@ -75,7 +74,6 @@ const LiveChat = ({ data }) => {
       clearInterval(i);
     };
   }, []);
-  console.log(finalChat);
 
   return (
     <>
