@@ -21,8 +21,10 @@ const SubscriberContainer = ({ channel }) => {
   const videoDescription = useSelector(
     (store) => store.selectVideo.selectVideo
   );
+  const description = videoDescription?.snippet?.description;
 
-  console.log(videoDescription?.snippet?.channelTitle);
+  const splitDescription = description.split("\n");
+  const joinDescription = splitDescription.join("\n");
 
   const handleLike = () => {
     setLike(!like);
@@ -65,11 +67,11 @@ const SubscriberContainer = ({ channel }) => {
             onClick={() => setSubscribe(!subscribe)}
           >
             {subscribe ? (
-              "Subscribe"
-            ) : (
               <span className="flex items-center gap-2 ">
                 <LuBellRing /> Subscribed
               </span>
+            ) : (
+              "Subscribe"
             )}
           </button>
           <div className="gap-3 flex">
@@ -126,8 +128,15 @@ const SubscriberContainer = ({ channel }) => {
             <p>3 month ago</p>
             <p>#tag</p>
           </div>
-          <div className="px-2">
-            <p>info...........</p>
+          <div className="px-2 py-3">
+            <p>
+              {description.split("\n").map((line, index) => (
+                <span key={index}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </p>
           </div>
         </div>
       </div>
