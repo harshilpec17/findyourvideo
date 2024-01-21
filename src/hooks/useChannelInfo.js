@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { API_KEY, CHANNEL_INFO } from "../utils/Constant";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addChannelInfo } from "../utils/Redux/selectedVideoSlice";
 
-const useChannelInfo = () => {
+export const useChannelInfo = () => {
+  const dispatch = useDispatch();
   const selectedVideoData = useSelector(
     (store) => store.selectVideo.selectVideo
   );
@@ -12,13 +14,10 @@ const useChannelInfo = () => {
     const data = await fetch(`${CHANNEL_INFO + channelId + "&key=" + API_KEY}`);
     const json = await data.json();
     const result = json.items[0];
-    console.log(result);
+    dispatch(addChannelInfo(result));
   };
 
   useEffect(() => {
     channelInfo();
   }, []);
-  return <></>;
 };
-
-export default useChannelInfo;
