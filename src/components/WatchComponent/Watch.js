@@ -4,7 +4,7 @@ import Video from "./Video";
 import LiveChatContainer from "./LiveChatContainer";
 import { useLiveMessage } from "../../hooks/useLiveMessage";
 import { useSelector } from "react-redux";
-import useChannelInfo from "../../hooks/useChannelInfo";
+import SubscriberContainer from "./SubscriberContainer";
 
 const Watch = () => {
   const chatData = useSelector((store) => store.chat.chatRandomData);
@@ -15,9 +15,10 @@ const Watch = () => {
 
   return (
     <>
-      <div className="px-5 py-4 flex justify-between w-screen">
-        <div className="w-[70%]">
+      <div className="px-5 py-4 flex flex-row justify-between w-screen">
+        <div>
           <Video id={searchParams.get("v")} />
+          <SubscriberContainer />
           <CommentContainer />
         </div>
         {chatData && <LiveChatContainer chatData={chatData} />}

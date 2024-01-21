@@ -49,6 +49,7 @@ const Header = () => {
   const handleMenu = () => {
     dispatch(toggleMenu());
   };
+  console.log(selectValue);
 
   return (
     <>
@@ -84,13 +85,14 @@ const Header = () => {
             <div className="absolute px-3 py-1 z-50 border bg-white col-span-10 w-[31.5rem] outline-none shadow-xl rounded-xl">
               <ul className="-mb-1.5">
                 {searchSuggestion.map((search) => (
-                  <li
+                  <p
                     key={search}
                     value={search}
+                    onClick={() => console.log(search)}
                     className="border-b py-1 cursor-pointer hover:bg-gray-500"
                   >
                     {search}
-                  </li>
+                  </p>
                 ))}
               </ul>
             </div>
