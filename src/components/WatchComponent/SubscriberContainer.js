@@ -11,6 +11,7 @@ import { LuListPlus } from "react-icons/lu";
 import { MdOutlineFlag } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../../utils/helper";
+import { Link } from "react-router-dom";
 
 const SubscriberContainer = ({ channel }) => {
   const [subscribe, setSubscribe] = useState(false);
@@ -22,9 +23,8 @@ const SubscriberContainer = ({ channel }) => {
     (store) => store.selectVideo.selectVideo
   );
   const description = videoDescription?.snippet?.description;
-
-  const splitDescription = description.split("\n");
-  const joinDescription = splitDescription.join("\n");
+  const linkRegex = /(https?:\/\/[^\s]+)/g;
+  const newLine = "\n";
 
   const handleLike = () => {
     setLike(!like);
@@ -120,7 +120,6 @@ const SubscriberContainer = ({ channel }) => {
           </div>
         </div>
       ) : null}
-
       <div className="mt-7">
         <div className="bg-[#414141] rounded-lg shadow-lg text-[#F1F1F1]">
           <div className="flex gap-3 p-2">
@@ -130,12 +129,29 @@ const SubscriberContainer = ({ channel }) => {
           </div>
           <div className="px-2 py-3">
             <p>
-              {description.split("\n").map((line, index) => (
-                <span key={index}>
-                  {line}
-                  <br />
-                </span>
-              ))}
+              {description &&
+                description.split(newLine).map((line) =>
+                  line.split(linkRegex).map((part, index) => (
+                    <span key={index}>
+                      {index % 2 === 1 ? (
+                        <Link
+                          to={part}
+                          // href={part}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-400"
+                        >
+                          {part}
+                        </Link>
+                      ) : (
+                        <span key={index}>
+                          {part}
+                          <br />
+                        </span>
+                      )}
+                    </span>
+                  ))
+                )}
             </p>
           </div>
         </div>

@@ -20,7 +20,7 @@ const Watch = () => {
   return (
     <>
       <div className="px-5 py-4 flex flex-row justify-between w-screen">
-        <div>
+        <div className="w-[70%]">
           <Video id={searchParams.get("v")} />
           {channelInfo && <SubscriberContainer channel={channelInfo} />}
           <CommentContainer />
