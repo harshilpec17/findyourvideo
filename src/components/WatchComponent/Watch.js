@@ -11,7 +11,6 @@ const Watch = () => {
   const chatData = useSelector((store) => store.chat.chatRandomData);
   const channelInfo = useSelector((store) => store.selectVideo.channelInfo);
 
-  console.log(channelInfo);
   const [searchParams] = useSearchParams();
 
   useLiveMessage();
@@ -23,7 +22,7 @@ const Watch = () => {
         <div className="w-[70%]">
           <Video id={searchParams.get("v")} />
           {channelInfo && <SubscriberContainer channel={channelInfo} />}
-          <CommentContainer />
+          <CommentContainer id={searchParams.get("v")} />
         </div>
         {chatData && <LiveChatContainer chatData={chatData} />}
       </div>

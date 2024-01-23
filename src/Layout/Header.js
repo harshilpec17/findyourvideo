@@ -49,7 +49,6 @@ const Header = () => {
   const handleMenu = () => {
     dispatch(toggleMenu());
   };
-  console.log(selectValue);
 
   return (
     <>

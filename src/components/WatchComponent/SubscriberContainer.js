@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PiShareFatThin } from "react-icons/pi";
 import { AiOutlineLike } from "react-icons/ai";
 import { GrDislike } from "react-icons/gr";
@@ -14,37 +14,81 @@ import { formatNumber } from "../../utils/helper";
 import { Link } from "react-router-dom";
 
 const SubscriberContainer = ({ channel }) => {
-  const [subscribe, setSubscribe] = useState(false);
-  const [like, setLike] = useState(false);
-  const [disLike, setDisLike] = useState(false);
-  const [dropDown, setDropDown] = useState(false);
-
   const videoDescription = useSelector(
+    // get a selected video from the store
     (store) => store.selectVideo.selectVideo
   );
+  // Get a description for the video
   const description = videoDescription?.snippet?.description;
+
+  // toggle state for the subscribe and subscribed button
+  const [subscribe, setSubscribe] = useState(false);
+
+  // toggle state for the like button
+  const [like, setLike] = useState(false);
+
+  // toggle state for the disLike button
+  const [disLike, setDisLike] = useState(false);
+
+  // toggle state for the dropDown menu for '...' button
+  const [dropDown, setDropDown] = useState(false);
+
+  // toggle state for the showMore and showLess button for description
+  const [showMore, setShowMore] = useState(true);
+
+  // Info state for the description of the video
+  const [info, setInfo] = useState(description);
+
   const linkRegex = /(https?:\/\/[^\s]+)/g;
   const newLine = "\n";
 
+  /**
+   * Handles the "Show More" functionality by truncating the given text to 300 characters and updating the info state.
+   * If showMore is true, the truncated text is used. Otherwise, the full text is used.
+   * @param {string} text - The text to be truncated.
+   */
+  function handleShowMore(text) {
+    let finalText = "";
+    const newText = text.substring(0, 300);
+    showMore ? (finalText = newText) : (finalText = description);
+    setInfo(finalText);
+  }
+  /*
+  Toggles the like state and sets the dislike state to false.
+  */
   const handleLike = () => {
     setLike(!like);
     setDisLike(false);
   };
+
+  /*
+  Toggles the disLike state and sets the like state to false.
+  */
   const handleDisLike = () => {
     setDisLike(!disLike);
     setLike(false);
   };
+
+  /**
+   * Executes the handleShowMore function when the showMore dependency changes.
+   * @param {string} info - The information string.
+   */
+  useEffect(() => {
+    handleShowMore(info);
+  }, [showMore]);
 
   if (channel === null) return;
   if (videoDescription === null) return;
 
   return (
     <div className="py-3">
+      {/* Title for the video */}
       <div>
         <h1 className="text-[#F1F1F1] font-bold text-2xl">
           {videoDescription?.snippet?.title}
         </h1>
       </div>
+      {/* Buttons for the video */}
       <div className="flex flex-row">
         <div className="py-3 flex items-center w-1/4">
           <img
@@ -120,6 +164,7 @@ const SubscriberContainer = ({ channel }) => {
           </div>
         </div>
       ) : null}
+      {/* Description section for the video */}
       <div className="mt-7">
         <div className="bg-[#414141] rounded-lg shadow-lg text-[#F1F1F1]">
           <div className="flex gap-3 p-2">
@@ -127,10 +172,12 @@ const SubscriberContainer = ({ channel }) => {
             <p>3 month ago</p>
             <p>#tag</p>
           </div>
+
+          {/* Description text for the video */}
           <div className="px-2 py-3">
             <p>
-              {description &&
-                description.split(newLine).map((line) =>
+              {info &&
+                info.split(newLine).map((line) =>
                   line.split(linkRegex).map((part, index) => (
                     <span key={index}>
                       {index % 2 === 1 ? (
@@ -152,6 +199,14 @@ const SubscriberContainer = ({ channel }) => {
                     </span>
                   ))
                 )}
+              <p
+                onClick={() => setShowMore(!showMore)}
+                className={`${
+                  showMore ? " text-orange-500" : "text-green-400"
+                } cursor-pointer`}
+              >
+                {showMore ? "Show More" : "Show less"}
+              </p>
             </p>
           </div>
         </div>
