@@ -12,6 +12,7 @@ import { MdOutlineFlag } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../../utils/helper";
 import { Link } from "react-router-dom";
+import { calculateTime } from "../../hooks/useCalculateTime";
 
 const SubscriberContainer = ({ channel }) => {
   const videoDescription = useSelector(
@@ -39,8 +40,14 @@ const SubscriberContainer = ({ channel }) => {
   // Info state for the description of the video
   const [info, setInfo] = useState(description);
 
+  // time state for the formate time
+  const [time, setTime] = useState();
+
   const linkRegex = /(https?:\/\/[^\s]+)/g;
   const newLine = "\n";
+  const publishedAt = videoDescription?.snippet?.publishedAt;
+
+  console.log(videoDescription);
 
   /**
    * Handles the "Show More" functionality by truncating the given text to 300 characters and updating the info state.
@@ -49,7 +56,7 @@ const SubscriberContainer = ({ channel }) => {
    */
   function handleShowMore(text) {
     let finalText = "";
-    const newText = text.substring(0, 300);
+    const newText = text.substring(0, 100);
     showMore ? (finalText = newText) : (finalText = description);
     setInfo(finalText);
   }
@@ -76,6 +83,16 @@ const SubscriberContainer = ({ channel }) => {
   useEffect(() => {
     handleShowMore(info);
   }, [showMore]);
+
+  useEffect(() => {
+    setTime(calculateTime(publishedAt));
+
+    // Update time every minute (60,000 milliseconds)
+    const intervalId = setInterval(calculateTime, 60000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [publishedAt]);
 
   if (channel === null) return;
   if (videoDescription === null) return;
@@ -166,16 +183,15 @@ const SubscriberContainer = ({ channel }) => {
       ) : null}
       {/* Description section for the video */}
       <div className="mt-7">
-        <div className="bg-[#414141] rounded-lg shadow-lg text-[#F1F1F1]">
-          <div className="flex gap-3 p-2">
-            <p>6.2 K view</p>
-            <p>3 month ago</p>
-            <p>#tag</p>
+        <div className="bg-[#414141] px-4 rounded-lg shadow-lg text-[#F1F1F1]">
+          <div className="flex gap-3 py-2">
+            <p>{formatNumber(videoDescription.statistics.viewCount)}</p>
+            <p>{time}</p>
           </div>
-
+          <p>{videoDescription.snippet.tags.map((tag) => "#" + tag + "  ")}</p>
           {/* Description text for the video */}
-          <div className="px-2 py-3">
-            <p>
+          <div className="py-3">
+            <div>
               {info &&
                 info.split(newLine).map((line) =>
                   line.split(linkRegex).map((part, index) => (
@@ -207,7 +223,7 @@ const SubscriberContainer = ({ channel }) => {
               >
                 {showMore ? "Show More" : "Show less"}
               </p>
-            </p>
+            </div>
           </div>
         </div>
       </div>

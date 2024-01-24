@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import VideoList from "./VideoList";
-import { API_KEY, POPULAR_VIDEO_URL } from "../../utils/Constant";
+import { POPULAR_VIDEO_URL } from "../../utils/Constant";
 import { useDispatch } from "react-redux";
 import { addPopularVideo } from "../../utils/Redux/videoSlice";
 

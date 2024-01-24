@@ -7,9 +7,9 @@ const ChatMessage = ({ name, text, image }) => {
         <img
           src={image}
           alt="profile"
-          className="w-6 h-6 border rounded bg-slate-200"
+          className="w-6 h-6 rounded bg-slate-200"
         ></img>
-        <div className="px-2 flex items-center">
+        <div className="px-2 flex items-center text-white">
           <p className="font-bold text-md">{name}</p>
           <p className="px-2 text-sm">{text}</p>
         </div>

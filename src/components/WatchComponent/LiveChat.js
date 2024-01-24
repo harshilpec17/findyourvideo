@@ -6,8 +6,6 @@ import { addMessage } from "../../utils/Redux/chatSlice";
 const LiveChat = ({ data }) => {
   const dispatch = useDispatch();
 
-  const [finalChat, setFinalChat] = useState(null);
-
   const finalMessage = useSelector((store) => store.chat.randomMessage);
 
   const textList = [

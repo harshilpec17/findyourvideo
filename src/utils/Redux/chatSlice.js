@@ -5,6 +5,7 @@ const chatSlice = createSlice({
   initialState: {
     randomMessage: [],
     chatRandomData: null,
+    videoComment: null,
   },
   reducers: {
     addMessage: (state, action) => {
@@ -14,8 +15,12 @@ const chatSlice = createSlice({
     addChatRandomData: (state, action) => {
       state.chatRandomData = action.payload;
     },
+    addVideoComment: (state, action) => {
+      state.videoComment = action.payload;
+    },
   },
 });
 
-export const { addMessage, addChatRandomData } = chatSlice.actions;
+export const { addMessage, addChatRandomData, addVideoComment } =
+  chatSlice.actions;
 export default chatSlice.reducer;

@@ -13,7 +13,7 @@ export const useChannelInfo = () => {
   const channelInfo = async () => {
     const data = await fetch(`${CHANNEL_INFO + channelId + "&key=" + API_KEY}`);
     const json = await data.json();
-    const result = json.items[0];
+    const result = json.items;
     dispatch(addChannelInfo(result));
   };
 
