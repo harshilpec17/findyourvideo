@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { formatNumber } from "../../utils/helper";
 import { useDispatch } from "react-redux";
 import { addSelectVideo } from "../../utils/Redux/selectedVideoSlice";
+import { calculateTime } from "../../hooks/useCalculateTime";
 
 const VideoCard = ({ popularVideo }) => {
   const dispatch = useDispatch();
+  const [time, setTime] = useState();
+  const timeStamp = popularVideo.snippet.publishedAt;
 
   const handleClick = () => {
     dispatch(addSelectVideo(popularVideo));
@@ -18,6 +21,16 @@ const VideoCard = ({ popularVideo }) => {
       return result;
     }
   }
+
+  useEffect(() => {
+    setTime(calculateTime(timeStamp));
+
+    // Update time every minute (60,000 milliseconds)
+    const intervalId = setInterval(calculateTime, 60000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [timeStamp]);
 
   return (
     <>
@@ -56,10 +69,16 @@ const VideoCard = ({ popularVideo }) => {
                 {popularVideo.snippet.title}
               </p>
 
-              <p> {popularVideo.snippet.channelTitle} </p>
-              <p className="text-gray-400 text-xs mt-1">
-                {formatNumber(parseInt(popularVideo.statistics.viewCount))}
+              <p className="text-gray-400">
+                {" "}
+                {popularVideo.snippet.channelTitle}{" "}
               </p>
+              <div className="flex items-center">
+                <p className="text-gray-400 text-xs mt-1">
+                  {formatNumber(parseInt(popularVideo.statistics.viewCount))}
+                </p>
+                <p className="text-gray-400 text-xs ml-2 mt-1">{time}</p>
+              </div>
             </div>
           </div>
         </card>

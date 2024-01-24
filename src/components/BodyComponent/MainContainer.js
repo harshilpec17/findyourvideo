@@ -11,6 +11,7 @@ const MainContainer = () => {
   useEffect(() => {
     dispatch(openMenu());
   }, []);
+
   return (
     <>
       <div className="flex flex-col w-screen max-w-max overflow-hidden">

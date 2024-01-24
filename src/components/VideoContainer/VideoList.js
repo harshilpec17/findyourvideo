@@ -2,10 +2,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
+import { useChannelInfo } from "../../hooks/useChannelInfo";
 
 const VideoList = () => {
   const video = useSelector((store) => store.video.mostPopularVideo);
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+
+  useChannelInfo();
 
   if (video === null) return;
   return (
