@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainContainer from "./components/BodyComponent/MainContainer";
 import Watch from "./components/WatchComponent/Watch";
+import SearchResult from "./components/SearchComponent/SearchResult";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,12 +21,15 @@ function App() {
           path: "watch",
           element: <Watch />,
         },
+        {
+          path: "results",
+          element: <SearchResult />,
+        },
       ],
     },
   ]);
   return (
     <Provider store={appStore}>
-      <Header />
       <RouterProvider router={router}></RouterProvider>
     </Provider>
   );

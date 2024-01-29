@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "./ButtonListComponent/Button";
-import { useSelector } from "react-redux";
 
 const ButtonList = () => {
   const buttonNames = [
