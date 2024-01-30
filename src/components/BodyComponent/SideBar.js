@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { svgList } from "../../utils/svgList";
-import { useNavigate } from "react-router-dom";
+import { svgList, svgMiscellaneous } from "../../utils/svgList";
+import { Link, useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -31,14 +31,29 @@ const SideBar = () => {
           </div>
           {svgList.map((x, index) => (
             <>
+              <Link to={`/results?search_query=${x.list}`}>
+                <div className="mx-6" key={index}>
+                  <h1 className="text-white text-left mt-2 py-1 -mb-2 w-full text-xl font-semibold">
+                    {x.heading}
+                  </h1>
+                </div>
+                <div className="flex list-none gap-3 px-8 cursor-pointer">
+                  {x.svgFile}
+                  <li className="text-white text-nowrap">{x.list}</li>
+                </div>
+              </Link>
+            </>
+          ))}
+          {svgMiscellaneous.map((m, index) => (
+            <>
               <div className="mx-6" key={index}>
                 <h1 className="text-white text-left mt-2 -mb-2 w-full text-xl font-semibold">
-                  {x.heading}
+                  {m.heading}
                 </h1>
               </div>
               <div className="flex list-none gap-3 px-8 cursor-pointer">
-                {x.svgFile}
-                <li className="text-white text-nowrap">{x.list}</li>
+                {m.svgFile}
+                <li className="text-white text-nowrap">{m.list}</li>
               </div>
             </>
           ))}

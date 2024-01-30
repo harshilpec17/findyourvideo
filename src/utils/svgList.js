@@ -209,6 +209,9 @@ export const svgList = [
   {
     heading: "",
   },
+];
+
+export const svgMiscellaneous = [
   {
     heading: "",
   },

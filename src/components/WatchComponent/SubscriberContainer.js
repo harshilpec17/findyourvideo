@@ -185,10 +185,19 @@ const SubscriberContainer = ({ channel }) => {
       <div className="mt-7">
         <div className="bg-[#414141] px-4 rounded-lg shadow-lg text-[#F1F1F1]">
           <div className="flex gap-3 py-2">
-            <p>{formatNumber(videoDescription.statistics.viewCount)}</p>
+            <p>
+              {videoDescription?.statistics?.viewCount
+                ? formatNumber(videoDescription?.statistics?.viewCount)
+                : "N/A"}
+            </p>
+
             <p>{time}</p>
           </div>
-          <p>{videoDescription.snippet.tags.map((tag) => "#" + tag + "  ")}</p>
+          <p>
+            {videoDescription?.snippet?.tags
+              ? videoDescription?.snippet?.tags.map((tag) => "#" + tag + "  ")
+              : null}
+          </p>
           {/* Description text for the video */}
           <div className="py-3">
             <div>

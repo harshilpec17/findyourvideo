@@ -21,6 +21,8 @@ const Watch = () => {
 
   if (chatData === null) return;
 
+  if (video === null) return;
+
   return (
     <>
       <div className="px-5 py-4 flex flex-row justify-between w-screen">
