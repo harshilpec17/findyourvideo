@@ -1,31 +1,58 @@
-import React from "react";
+import React, { useRef } from "react";
 import Button from "./ButtonListComponent/Button";
+import { MdNavigateBefore } from "react-icons/md";
+import { MdNavigateNext } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const ButtonList = () => {
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+  const navRef = useRef();
+
   const buttonNames = [
-    "All",
-    "Live",
-    "Music",
+    "Niagara Falls",
+    "Maple Leaf",
+    "Hollywood",
+    "Movie Trailer",
     "Ice Hockey",
+    "Music",
     "Soccer",
     "Rugby",
     "Gaming",
     "Podcasts",
+    "Bollywood",
     "Camping",
     "Culinary Arts",
     "Trucks",
-    "GameShows",
-    "Game Shows",
-    "Game Shows",
-    "Game Shows",
-    "Game Shows",
+    "Cricket",
+    "Canada",
+    "Tourism",
   ];
+
   return (
     <>
-      <div className="flex my-2 w-screen overflow-x-scroll">
-        {buttonNames.map((buttonName, index) => (
-          <Button name={buttonName} key={index} />
-        ))}
+      <div
+        className={`${isMenuOpen ? "w-[97%]" : "w-[92%]"} flex items-center `}
+      >
+        <div className="text-white font-extrabold text-4xl cursor-pointer">
+          <MdNavigateBefore
+            onClick={() => (navRef ? (navRef.current.scrollLeft -= 400) : null)}
+          />
+        </div>
+        <div
+          ref={navRef}
+          className="flex my-2 w-screen scroll overflow-x-hidden scroll-smooth"
+        >
+          {buttonNames.map((buttonName, index) => (
+            <div>
+              <Button name={buttonName} key={index} />
+            </div>
+          ))}
+        </div>
+        <div className="text-white font-extrabold text-4xl cursor-pointer">
+          <MdNavigateNext
+            onClick={() => (navRef ? (navRef.current.scrollLeft += 400) : null)}
+          />
+        </div>
       </div>
     </>
   );

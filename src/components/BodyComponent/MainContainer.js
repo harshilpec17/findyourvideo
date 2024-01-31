@@ -14,11 +14,9 @@ const MainContainer = () => {
 
   return (
     <>
-      <div className="flex flex-col w-screen max-w-max overflow-hidden">
+      <div className="flex flex-col w-screen max-w-max overflow-hidden bg-zinc-950">
         <div
-          className={`${
-            isMenuOpen ? "w-[83%] ml-[17%]" : "w-[100%]"
-          } overflow-x-scroll mx-16`}
+          className={`${isMenuOpen ? "w-[83%] ml-[17%]" : "w-[100%]"} mx-16`}
         >
           <ButtonList />
         </div>

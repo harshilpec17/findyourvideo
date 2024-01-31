@@ -27,24 +27,29 @@ const SearchResult = () => {
   useEffect(() => {
     dispatch(openMenu());
     getSearchResult();
-  }, []);
-
-  console.log(data);
+    window.scrollTo(0, 0);
+  }, [query]);
 
   if (data === null) return;
 
-  return (
+  return data === null ? (
+    <ShimmerSearchCard />
+  ) : (
     <>
-      <div
-        className={`${
-          isMenuOpen ? "w-[83%] ml-[17%]" : "w-[100%] ml-[10%]"
-        } overflow-x-scroll px-28 h-screen flex flex-col`}
-      >
-        {data.map((card) => (
-          <Link to={`/watch?v=${card.id.videoId}`}>
-            <SearchVideoCard data={card} key={card.id.videoId} />
-          </Link>
-        ))}
+      <div className="bg-slate-600 h-max">
+        <div
+          className={`${
+            isMenuOpen ? "w-[83%] ml-[17%]" : "w-[100%] ml-[10%]"
+          } px-28 flex flex-col`}
+        >
+          {data.map((card) => (
+            <div>
+              <Link to={`/watch?v=${card.id.videoId}`}>
+                <SearchVideoCard data={card} key={card.id.videoId} />
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

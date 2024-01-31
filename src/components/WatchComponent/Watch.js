@@ -6,7 +6,6 @@ import { useLiveMessage } from "../../hooks/useLiveMessage";
 import { useSelector } from "react-redux";
 import SubscriberContainer from "./SubscriberContainer";
 import { useChannelInfo } from "../../hooks/useChannelInfo";
-import VideoContainer from "../VideoContainer/VideoContainer";
 import VideoCard from "../VideoContainer/VideoCard";
 
 const Watch = () => {
@@ -25,7 +24,7 @@ const Watch = () => {
 
   return (
     <>
-      <div className="px-5 py-4 flex flex-row justify-between w-screen">
+      <div className="px-5 py-4 flex flex-row justify-between w-screen bg-zinc-950">
         <div className="w-[70%]">
           <Video id={searchParams.get("v")} />
           {channelInfo && <SubscriberContainer channel={channelInfo} />}

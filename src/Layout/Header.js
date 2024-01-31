@@ -2,15 +2,31 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/Redux/appSlice";
 import { cacheResult } from "../utils/Redux/searchSlice";
+import { SlSocialYoutube } from "react-icons/sl";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { Link, useNavigate } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
+import SearchSuggestionComponent from "../components/SearchComponent/SearchSuggestionComponent";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const searchResult = useSelector((store) => store.search.searchResult);
-
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchSuggestion, setSearchSuggestion] = useState([]);
+  const [searchSuggestion, setSearchSuggestion] = useState(null);
   const [showSuggestion, setShowSuggestion] = useState(false);
+
+  const logoStyle = { color: "white", fontSize: "4.5rem", cursor: "pointer" };
+  const hamburgerStyle = {
+    color: "white",
+    fontSize: "2rem",
+    cursor: "pointer",
+  };
+  const userStyle = {
+    color: "white",
+    fontSize: "2rem",
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,6 +49,7 @@ const Header = () => {
     );
     const json = await data.json();
     const result = json;
+
     setSearchSuggestion(result[1]);
 
     dispatch(
@@ -46,23 +63,19 @@ const Header = () => {
     dispatch(toggleMenu());
   };
 
+  const handleLogo = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <div className="grid grid-flow-col p-5 shadow-lg items-center bg-[#0F0F0F]">
-        <div className="flex col-span-1">
-          <img
-            src="https://cdn.icon-icons.com/icons2/2596/PNG/512/hamburger_button_menu_icon_155296.png"
-            alt="Hamburger Line"
-            className="w-10 cursor-pointer"
-            onClick={handleMenu}
-          ></img>
-          <img
-            src="https://static-00.iconduck.com/assets.00/youtube-play-icon-1024x746-bd51hb10.png"
-            alt="Logo"
-            className="w-32 h-12 mx-2"
-          ></img>
+        <div className="flex col-span-2 items-center justify-around px-5">
+          <GiHamburgerMenu style={hamburgerStyle} onClick={handleMenu} />
+
+          <SlSocialYoutube style={logoStyle} onClick={handleLogo} />
         </div>
-        <div className="col-span-10 text-left ml-10 text-white">
+        <div className="col-span-9 text-left ml-32 text-white">
           <div>
             <input
               type="text"
@@ -72,33 +85,27 @@ const Header = () => {
               onBlur={() => setShowSuggestion(false)}
               className="outline-none px-2 py-2 w-1/2 rounded-l-lg bg-[#222221] text-white"
             ></input>
-            <button className="px-8 py-2 text-[#888888] rounded-r-lg outline-none bg-[#222221]">
-              Search
-            </button>
+            <Link to={`/results?search_query=${searchQuery}`}>
+              <button className="px-8 py-2 text-[#888888] rounded-r-lg outline-none border-l border-black bg-[#222221]">
+                Search
+              </button>
+            </Link>
           </div>
           {searchQuery !== "" && showSuggestion && (
             <div className="absolute px-3 py-1 z-50 bg-[#222221] col-span-10 w-[31.5rem] outline-none shadow-xl rounded-xl">
-              <ul className="-mb-1.5">
-                {searchSuggestion.map((search) => (
-                  <p
-                    key={search}
-                    value={search}
-                    onClick={() => console.log(search)}
-                    className="border-b border-b-zinc-700 py-1 rounded px-1 cursor-pointer text-white hover:bg-zinc-700"
-                  >
-                    {search}
-                  </p>
-                ))}
-              </ul>
+              {searchSuggestion.map((search) => (
+                <div
+                  value={console.log(search)}
+                  onClick={(e) => console.log(e.target.value)}
+                >
+                  <SearchSuggestionComponent key={search} search={search} />
+                </div>
+              ))}
             </div>
           )}
         </div>
-        <div className="col-span-1 m-auto">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png"
-            alt="userIcon"
-            className="w-10"
-          ></img>
+        <div className="col-span-1 px-7">
+          <FaUserAlt style={userStyle} />
         </div>
       </div>
     </>

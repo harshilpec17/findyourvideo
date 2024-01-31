@@ -10,7 +10,7 @@ const SideBar = () => {
   return (
     <>
       {isMenuOpen ? (
-        <div className="w-[17%] h-screen p-4 absolute z-50 bg-[#0F0F0F] shadow-xl flex flex-col gap-2 items-start">
+        <div className="w-[17%] h-max p-4 absolute z-50 bg-[#0F0F0F] shadow-xl flex flex-col gap-2 items-start">
           <div className="flex px-8 gap-3" onClick={() => navigate("/")}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
