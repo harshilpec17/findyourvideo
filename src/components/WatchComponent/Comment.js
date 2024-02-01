@@ -9,6 +9,8 @@ const Comment = ({ data }) => {
     publishedAt,
   } = data.snippet?.topLevelComment?.snippet;
 
+  console.log(data.snippet?.topLevelComment?.snippet);
+
   const [time, setTime] = useState();
   useEffect(() => {
     setTime(calculateTime(publishedAt));
@@ -25,11 +27,21 @@ const Comment = ({ data }) => {
   return (
     <>
       <div className="flex items-center py-1 text-white">
-        <img
-          src={`${authorProfileImageUrl}`}
-          alt="user"
-          className="w-10 h-10 rounded-full"
-        ></img>
+        {authorProfileImageUrl ? (
+          <img
+            alt="user"
+            src={authorProfileImageUrl}
+            className="w-10 h-10 rounded-full"
+          ></img>
+        ) : (
+          <img
+            alt="user"
+            src={
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNhPfPQ0f1BFPpk4lGR3gBEzewX20j0F2BSQ&usqp=CAU"
+            }
+            className="w-10 h-10 rounded-full"
+          ></img>
+        )}
         <div className="px-4 rounded-md w-full">
           <div className="flex items-center">
             <p className="font-semibold text-white">{authorDisplayName}</p>

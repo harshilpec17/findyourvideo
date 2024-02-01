@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import SubscriberContainer from "./SubscriberContainer";
 import { useChannelInfo } from "../../hooks/useChannelInfo";
 import VideoCard from "../VideoContainer/VideoCard";
+import { useEffect } from "react";
 
 const Watch = () => {
   const chatData = useSelector((store) => store.chat.chatRandomData);
@@ -17,6 +18,13 @@ const Watch = () => {
 
   useLiveMessage();
   useChannelInfo();
+
+  const id = searchParams.get("v");
+
+  useEffect(() => {
+    // scroll to top on page load
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [id]);
 
   if (chatData === null) return;
 
