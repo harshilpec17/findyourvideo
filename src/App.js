@@ -3,12 +3,14 @@ import appStore from "./utils/Redux/appStore";
 import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainContainer from "./components/BodyComponent/MainContainer";
-import Watch from "./components/WatchComponent/Watch";
 import SearchResult from "./components/SearchComponent/SearchResult";
 import Error from "./Error";
 import ContactUs from "./components/ContactUsComponent/ContactUs";
+import { Suspense, lazy } from "react";
+import ShimmerWatchContainer from "./components/WatchComponent/ShimmerWatchContainer";
 
 function App() {
+  const WatchPage = lazy(() => import("./components/WatchComponent/Watch"));
   const router = createBrowserRouter([
     {
       path: "/",
@@ -21,7 +23,11 @@ function App() {
         },
         {
           path: "watch",
-          element: <Watch />,
+          element: (
+            <Suspense fallback={<ShimmerWatchContainer />}>
+              <WatchPage />
+            </Suspense>
+          ),
         },
         {
           path: "results",

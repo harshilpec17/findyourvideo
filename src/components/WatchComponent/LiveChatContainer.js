@@ -10,7 +10,7 @@ const LiveChatContainer = ({ chatData }) => {
 
   return (
     <>
-      <div className=" bg-zinc-700 shadow-xl rounded justify-between flex-col py-1  h-[550px]">
+      <div className=" bg-zinc-700 shadow-xl rounded justify-between flex-col py-1 w-full h-[550px]">
         <div className="h-[38px]">
           <h1 className="font-bold text-center border-b border-black text-white py-1 text-xl">
             Live Chat

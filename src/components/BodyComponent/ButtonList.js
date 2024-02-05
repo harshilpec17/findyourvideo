@@ -42,9 +42,9 @@ const ButtonList = () => {
           ref={navRef}
           className="flex my-2 w-screen scroll overflow-x-hidden scroll-smooth"
         >
-          {buttonNames.map((buttonName, index) => (
-            <div>
-              <Button name={buttonName} key={index} />
+          {buttonNames.map((buttonName) => (
+            <div key={Math.random()}>
+              <Button name={buttonName} />
             </div>
           ))}
         </div>

@@ -39,7 +39,7 @@ const VideoCard = ({ popularVideo }) => {
         onClick={handleClick}
         className="col-span-12 sm:col-span-6 md:col-span-3 ml-3 mb-6 w-80"
       >
-        <card className="w-full flex flex-col">
+        <div className="w-full flex flex-col">
           <div className="relative">
             {/* <!-- Image Video --> */}
 
@@ -55,14 +55,6 @@ const VideoCard = ({ popularVideo }) => {
           </div>
 
           <div className="flex flex-row mt-2 gap-2 ">
-            {/* <!-- Profile Picture --> */}
-
-            {/* <img
-              src=" "
-              alt="Icon"
-              className="rounded-full max-h-10 max-w-10"
-            /> */}
-
             {/* <!-- Description --> */}
             <div className="flex flex-col">
               <p className="text-gray-100 text-sm font-semibold">
@@ -81,7 +73,7 @@ const VideoCard = ({ popularVideo }) => {
               </div>
             </div>
           </div>
-        </card>
+        </div>
       </div>
     </>
   );

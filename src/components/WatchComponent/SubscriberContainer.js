@@ -110,10 +110,7 @@ const SubscriberContainer = ({ channel }) => {
         <div className="py-3 flex items-center w-1/4">
           <img
             alt="thumbnail"
-            src={
-              channel?.snippet?.thumbnails?.medium?.url ||
-              "https://cdn.pixabay.com/photo/2016/02/01/12/33/play-1173551_640.png"
-            }
+            src={channel?.snippet?.thumbnails?.medium?.url}
             className="w-12 rounded-full"
           ></img>
           <div className="mx-3 text-[#F1F1F1]">

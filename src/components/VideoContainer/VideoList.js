@@ -1,8 +1,8 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
 import { useChannelInfo } from "../../hooks/useChannelInfo";
+import { ShimmerVideoContainer } from "./ShimmerVideoContainer";
 
 const VideoList = () => {
   const video = useSelector((store) => store.video.mostPopularVideo);
@@ -10,8 +10,9 @@ const VideoList = () => {
 
   useChannelInfo();
 
-  if (video === null) return;
-  return (
+  return video === null ? (
+    <ShimmerVideoContainer />
+  ) : (
     <>
       <div
         className={`flex py-3 flex-wrap ${

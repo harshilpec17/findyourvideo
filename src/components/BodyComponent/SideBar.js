@@ -10,11 +10,11 @@ const SideBar = () => {
   return (
     <>
       {isMenuOpen ? (
-        <div className="w-[17%] h-max p-4 absolute z-50 bg-[#0F0F0F] shadow-xl flex flex-col gap-2 items-start">
+        <div className="w-[17%] h-max p-4 relative md:absolute md:z-50 bg-[#0F0F0F] shadow-xl flex flex-col gap-2 items-start">
           <div className="flex px-8 gap-3" onClick={() => navigate("/")}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              enable-background="new 0 0 24 24"
+              enableBackground="new 0 0 24 24"
               height="24"
               viewBox="0 0 24 24"
               width="24"
@@ -29,10 +29,10 @@ const SideBar = () => {
               Home
             </li>
           </div>
-          {svgList.map((x, index) => (
-            <>
+          {svgList.map((x) => (
+            <div key={Math.random()}>
               <Link to={`/results?search_query=${x.list}`}>
-                <div className="mx-6" key={index}>
+                <div className="mx-6">
                   <h1 className="text-white text-left mt-2 py-1 -mb-2 w-full text-xl font-semibold">
                     {x.heading}
                   </h1>
@@ -42,11 +42,11 @@ const SideBar = () => {
                   <li className="text-white text-nowrap">{x.list}</li>
                 </div>
               </Link>
-            </>
+            </div>
           ))}
-          {svgMiscellaneous.map((m, index) => (
-            <>
-              <div className="mx-6" key={index}>
+          {svgMiscellaneous.map((m) => (
+            <div key={Math.random()}>
+              <div className="mx-6">
                 <h1 className="text-white text-left mt-2 -mb-2 w-full text-xl font-semibold">
                   {m.heading}
                 </h1>
@@ -55,7 +55,7 @@ const SideBar = () => {
                 {m.svgFile}
                 <li className="text-white text-nowrap">{m.list}</li>
               </div>
-            </>
+            </div>
           ))}
         </div>
       ) : null}

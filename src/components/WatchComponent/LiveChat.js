@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ChatMessage from "./ChatMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage } from "../../utils/Redux/chatSlice";
@@ -66,7 +66,7 @@ const LiveChat = ({ data }) => {
           image: generateImage(),
         })
       );
-    }, 1500);
+    }, 800);
 
     return () => {
       clearInterval(i);
@@ -78,7 +78,12 @@ const LiveChat = ({ data }) => {
       <div className="flex flex-col-reverse">
         {finalMessage !== undefined &&
           finalMessage.map((x) => (
-            <ChatMessage image={x.image} text={x.text} name={x.name} />
+            <ChatMessage
+              key={Math.random()}
+              image={x.image}
+              text={x.text}
+              name={x.name}
+            />
           ))}
       </div>
     </>

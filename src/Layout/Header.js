@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/Redux/appSlice";
 import { cacheResult } from "../utils/Redux/searchSlice";
@@ -7,6 +7,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import SearchSuggestionComponent from "../components/SearchComponent/SearchSuggestionComponent";
+import { SEARCH_API } from "../utils/Constant";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -43,10 +44,7 @@ const Header = () => {
   }, [searchQuery]);
 
   const getSearchResult = async () => {
-    const data = await fetch(
-      "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=" +
-        searchQuery
-    );
+    const data = await fetch(SEARCH_API + searchQuery);
     const json = await data.json();
     const result = json;
 
@@ -72,11 +70,10 @@ const Header = () => {
       <div className="grid grid-flow-col p-5 shadow-lg items-center bg-[#0F0F0F]">
         <div className="flex col-span-2 items-center justify-around px-5">
           <GiHamburgerMenu style={hamburgerStyle} onClick={handleMenu} />
-
           <SlSocialYoutube style={logoStyle} onClick={handleLogo} />
         </div>
         <div className="col-span-9 text-left ml-32 text-white">
-          <div>
+          <form>
             <input
               type="text"
               value={searchQuery}
@@ -90,16 +87,11 @@ const Header = () => {
                 Search
               </button>
             </Link>
-          </div>
+          </form>
           {searchQuery !== "" && showSuggestion && (
             <div className="absolute px-3 py-1 z-50 bg-[#222221] col-span-10 w-[31.5rem] outline-none shadow-xl rounded-xl">
               {searchSuggestion.map((search) => (
-                <div
-                  value={console.log(search)}
-                  onClick={(e) => console.log(e.target.value)}
-                >
-                  <SearchSuggestionComponent key={search} search={search} />
-                </div>
+                <SearchSuggestionComponent key={search} search={search} />
               ))}
             </div>
           )}

@@ -30,13 +30,11 @@ const SearchResult = () => {
     window.scrollTo(0, 0);
   }, [query]);
 
-  if (data === null) return;
-
   return data === null ? (
     <ShimmerSearchCard />
   ) : (
     <>
-      <div className="bg-slate-600 h-max">
+      <div className="bg-zinc-950 h-max">
         <div
           className={`${
             isMenuOpen ? "w-[83%] ml-[17%]" : "w-[100%] ml-[10%]"
