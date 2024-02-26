@@ -6,7 +6,6 @@ import { SlSocialYoutube } from "react-icons/sl";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
-import SearchSuggestionComponent from "../components/SearchComponent/SearchSuggestionComponent";
 import { SEARCH_API } from "../utils/Constant";
 
 const Header = () => {
@@ -15,7 +14,7 @@ const Header = () => {
 
   const searchResult = useSelector((store) => store.search.searchResult);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchSuggestion, setSearchSuggestion] = useState(null);
+  const [searchSuggestion, setSearchSuggestion] = useState();
   const [showSuggestion, setShowSuggestion] = useState(false);
 
   const logoStyle = { color: "white", fontSize: "4.5rem", cursor: "pointer" };
@@ -88,10 +87,18 @@ const Header = () => {
               </button>
             </Link>
           </form>
+
           {searchQuery !== "" && showSuggestion && (
             <div className="absolute px-3 py-1 z-50 bg-[#222221] col-span-10 w-[31.5rem] outline-none shadow-xl rounded-xl">
               {searchSuggestion.map((search) => (
-                <SearchSuggestionComponent key={search} search={search} />
+                <li key={search}>
+                  <Link
+                    to={`/results?search_query=${search}`}
+                    className="border-b list-none border-b-zinc-700 py-1 rounded px-1 cursor-pointer text-white hover:bg-zinc-700"
+                  >
+                    {search}
+                  </Link>
+                </li>
               ))}
             </div>
           )}

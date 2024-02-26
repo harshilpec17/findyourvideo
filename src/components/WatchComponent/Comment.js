@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
 import { calculateTime } from "../../hooks/useCalculateTime";
 
 const Comment = ({ data }) => {
@@ -9,7 +11,7 @@ const Comment = ({ data }) => {
     publishedAt,
   } = data.snippet?.topLevelComment?.snippet;
 
-  console.log(data.snippet?.topLevelComment?.snippet);
+  console.log(data);
 
   const [time, setTime] = useState();
   useEffect(() => {
@@ -54,6 +56,55 @@ const Comment = ({ data }) => {
       </div>
     </>
   );
+};
+
+const CommentBox = ({ comment, handle, rep }) => {
+  return (
+    <div>
+      <Comment data={comment} />
+      {comment.replies && (
+        <div className="ml-20 my-2 pl-3 border-l border-l-gray-500 ">
+          <div
+            onClick={handle}
+            className="flex items-center gap-2 cursor-pointer font-medium text-blue-600"
+          >
+            Replies ({comment.replies.comments.length}){" "}
+            {rep ? (
+              <FaChevronUp size={15} className="mt-1" />
+            ) : (
+              <FaChevronDown size={15} className="mt-1" />
+            )}
+          </div>
+          {rep && <CommentList comments={comment.replies.comments} />}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const CommentList = ({ comments }) => {
+  const [showIndex, setShowIndex] = useState(null);
+  const handleShow = (index) => {
+    if (showIndex !== index) {
+      setShowIndex(index);
+    } else {
+      setShowIndex(null);
+    }
+  };
+
+  comments.map((comment, index) => (
+    <CommentBox
+      key={comment.id}
+      rep={index === showIndex ? true : false}
+      handle={() => handleShow(index)}
+      comment={comment}
+      index={index}
+    />
+  ));
+};
+
+const commentContainer = () => {
+  <CommentList comments={Comment} />;
 };
 
 export default Comment;

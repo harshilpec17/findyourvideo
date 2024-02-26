@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openMenu } from "../../utils/Redux/appSlice";
 import { ShimmerSearchCard } from "./ShimmerSearchCard";
@@ -22,6 +22,7 @@ const SearchResult = () => {
     const json = await data.json();
     const result = json.items;
     setData(result);
+    console.log("api call made....");
   };
 
   useEffect(() => {
@@ -29,6 +30,8 @@ const SearchResult = () => {
     getSearchResult();
     window.scrollTo(0, 0);
   }, [query]);
+
+  // const searchResult = useMemo(() => data, [data]);
 
   return data === null ? (
     <ShimmerSearchCard />

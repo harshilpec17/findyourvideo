@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 
 const SearchSuggestionComponent = ({ search }) => {
   const [data, setData] = useState(null);
-  console.log(data);
+
   const array = [search];
 
   return (
