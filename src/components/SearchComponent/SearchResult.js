@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { openMenu } from "../../utils/Redux/appSlice";
 import { ShimmerSearchCard } from "./ShimmerSearchCard";
 import { Link, useSearchParams } from "react-router-dom";
-
 import SearchVideoCard from "./SearchVideoCard";
-import { API_KEY } from "../../utils/Constant";
+import { API_KEY } from "../../utils/Constant/constants";
 
 const SearchResult = () => {
   const dispatch = useDispatch();

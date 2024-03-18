@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { API_KEY, CHANNEL_INFO } from "../utils/Constant";
+import { API_KEY, CHANNEL_INFO } from "../utils/Constant/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addChannelInfo } from "../utils/Redux/selectedVideoSlice";
 

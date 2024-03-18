@@ -6,7 +6,7 @@ import { SlSocialYoutube } from "react-icons/sl";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
-import { SEARCH_API } from "../utils/Constant";
+import { SEARCH_API } from "../utils/Constant/constants";
 
 const Header = () => {
   const dispatch = useDispatch();

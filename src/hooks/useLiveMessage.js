@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/Redux/appSlice";
 import { addChatRandomData } from "../utils/Redux/chatSlice";
-import { RANDOM_USER } from "../utils/Constant";
+import { RANDOM_USER } from "../utils/Constant/constants";
 
 export const useLiveMessage = () => {
   const dispatch = useDispatch();

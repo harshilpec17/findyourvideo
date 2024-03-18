@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
-import { API_KEY, COMMENT_API } from "../../utils/Constant";
+import { API_KEY, COMMENT_API } from "../../utils/Constant/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addVideoComment } from "../../utils/Redux/chatSlice";
 
