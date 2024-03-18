@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openMenu } from "../../utils/Redux/appSlice";
 import { ShimmerSearchCard } from "./ShimmerSearchCard";
 import { Link, useSearchParams } from "react-router-dom";
-import { API_KEY } from "../../utils/Constant";
+
 import SearchVideoCard from "./SearchVideoCard";
+import { API_KEY } from "../../utils/Constant";
 
 const SearchResult = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,6 @@ const SearchResult = () => {
     const json = await data.json();
     const result = json.items;
     setData(result);
-    console.log("api call made....");
   };
 
   useEffect(() => {
