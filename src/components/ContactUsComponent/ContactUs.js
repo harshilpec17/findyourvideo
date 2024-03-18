@@ -134,10 +134,10 @@ const ContactUs = () => {
             <div className="col-span-4 sm:col-span-9">
               <div className="bg-[#12100E] shadow rounded-lg p-6">
                 <div className="my-2">
-                  <h2 className="text-xl font-bold mb-2 text-red-400">
+                  <h2 className="text-2xl font-bold mb-2 text-red-400">
                     Overview
                   </h2>
-                  <p className="text-gray-100">
+                  <p className="text-gray-100 text-xl">
                     Video streaming web application providing core
                     functionalities to users with a familiar interface for
                     browsing, recommendation, watching, and interacting with
@@ -150,73 +150,11 @@ const ContactUs = () => {
                 </div>
 
                 <div className="mt-4">
-                  <h2 className="text-xl font-bold text-red-400">Technology</h2>
-                </div>
-                <div className="my-2">
-                  <ul className="text-gray-100">
-                    <li>
-                      <span className="font-bold py-1 text-blue-400">
-                        React:{" "}
-                      </span>{" "}
-                      The app's front end is developed using React, a popular
-                      JavaScript library for building user interfaces, enabling
-                      fast and interactive components.
-                    </li>
-                    <li>
-                      <span className="font-bold text-blue-400">
-                        HTML & CSS:
-                      </span>{" "}
-                      The app's structure and styling are created using HTML and
-                      CSS, ensuring a clean and visually appealing layout.
-                    </li>
-                    <li>
-                      <span className="font-bold text-blue-400">
-                        Tailwind CSS:
-                      </span>{" "}
-                      Tailwind CSS is used for rapid UI development, providing
-                      utility classes to style elements and components
-                      efficiently.
-                    </li>
-                    <li>
-                      <span className="font-bold text-blue-400">
-                        React Router:
-                      </span>{" "}
-                      React Router is utilized for navigation, enabling dynamic
-                      routing and rendering of different components based on the
-                      URL.
-                    </li>
-
-                    <li>
-                      <span className="font-bold text-blue-400">
-                        Redux Toolkit:
-                      </span>{" "}
-                      Redux Toolkit is employed for state management, allowing
-                      the app to manage complex state logic and data flow
-                      efficiently.
-                    </li>
-                    <li>
-                      <span className="font-bold text-blue-400">Vercel:</span>{" "}
-                      Vercel is used for deployment, providing a seamless and
-                      efficient platform for hosting the app and managing its
-                      deployment lifecycle.
-                    </li>
-
-                    <li>
-                      <span className="font-bold text-blue-400">
-                        Custom Hooks:
-                      </span>{" "}
-                      Custom hooks are created to encapsulate reusable logic,
-                      enhancing code reusability and maintainability.
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="mt-4">
-                  <h2 className="text-xl font-bold text-red-400">
+                  <h2 className="text-2xl font-bold text-red-400">
                     Key Features:
                   </h2>
                 </div>
-                <div className="my-2">
+                <div className="my-2 text-xl">
                   <p>
                     <span className="font-bold text-yellow-200 text-xl">
                       Debouncing searchbar :
@@ -313,54 +251,128 @@ const ContactUs = () => {
                     and subscriber count.
                   </p>
                 </div>
+                <div className="mt-4">
+                  <h2 className="text-2xl font-bold text-red-400">
+                    Technology
+                  </h2>
+                </div>
+                <div className="my-2">
+                  <ul className="text-gray-100 text-xl">
+                    <li className="my-2">
+                      <span className="font-bold py-1 text-blue-400">
+                        React:{" "}
+                      </span>{" "}
+                      The app's front end is developed using React, a popular
+                      JavaScript library for building user interfaces, enabling
+                      fast and interactive components.
+                    </li>
+                    <li className="my-2">
+                      <span className="font-bold text-blue-400">
+                        HTML & CSS:
+                      </span>{" "}
+                      The app's structure and styling are created using HTML and
+                      CSS, ensuring a clean and visually appealing layout.
+                    </li>
+                    <li className="my-2">
+                      <span className="font-bold text-blue-400">
+                        Tailwind CSS:
+                      </span>{" "}
+                      Tailwind CSS is used for rapid UI development, providing
+                      utility classes to style elements and components
+                      efficiently.
+                    </li>
+                    <li className="my-2">
+                      <span className="font-bold text-blue-400">
+                        React Router:
+                      </span>{" "}
+                      React Router is utilized for navigation, enabling dynamic
+                      routing and rendering of different components based on the
+                      URL.
+                    </li>
 
-                <h2 className="text-xl font-bold mt-6 mb-4">Experience</h2>
+                    <li className="my-2">
+                      <span className="font-bold text-blue-400">
+                        Redux Toolkit:
+                      </span>{" "}
+                      Redux Toolkit is employed for state management, allowing
+                      the app to manage complex state logic and data flow
+                      efficiently.
+                    </li>
+                    <li className="my-2">
+                      <span className="font-bold text-blue-400">Vercel:</span>{" "}
+                      Vercel is used for deployment, providing a seamless and
+                      efficient platform for hosting the app and managing its
+                      deployment lifecycle.
+                    </li>
+
+                    <li className="my-2">
+                      <span className="font-bold text-blue-400">
+                        Custom Hooks:
+                      </span>{" "}
+                      Custom hooks are created to encapsulate reusable logic,
+                      enhancing code reusability and maintainability.
+                    </li>
+                  </ul>
+                </div>
+
+                <h2 className="text-2xl text-green-500 bg-white px-2 py-1 font-bold mt-6 mb-4">
+                  Experience
+                </h2>
                 <div className="mb-6">
                   <div className="flex justify-between flex-wrap gap-2 w-full">
-                    <span className="text-gray-700 font-bold">
-                      Web Developer
+                    <span className="text-purple-500 font-semibold text-2xl">
+                      Find Your Movie
                     </span>
                     <p>
-                      <span className="text-gray-700 mr-2">at ABC Company</span>
-                      <span className="text-gray-700">2017 - 2019</span>
+                      <span
+                        onClick={() =>
+                          openInNewTab("https://findyourmovie.vercel.app/")
+                        }
+                        className="text-blue-400 text-lg underline cursor-pointer mr-2"
+                      >
+                        findyourmovie.vercel.app
+                      </span>
                     </p>
                   </div>
-                  <p className="mt-2">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    finibus est vitae tortor ullamcorper, ut vestibulum velit
-                    convallis. Aenean posuere risus non velit egestas suscipit.
+                  <p className="pt-2">
+                    <span className="text-gray-100 text-xl ">
+                      The Movie Recommendation Web App is an innovative platform
+                      designed to provide personalized movie recommendations
+                      based on the user's mood. Powered by the{" "}
+                      <span className="text-orange-400 font-bold">
+                        GPT-3.5 Turbo{" "}
+                      </span>
+                      model, the app leverages advanced natural language
+                      processing to understand user inputs and generate relevant
+                      movie suggestions.
+                    </span>
                   </p>
                 </div>
                 <div className="mb-6">
                   <div className="flex justify-between flex-wrap gap-2 w-full">
-                    <span className="text-gray-700 font-bold">
-                      Web Developer
+                    <span className="text-purple-500 font-semibold text-2xl">
+                      Find Your Food
                     </span>
                     <p>
-                      <span className="text-gray-700 mr-2">at ABC Company</span>
-                      <span className="text-gray-700">2017 - 2019</span>
+                      <span
+                        onClick={() =>
+                          openInNewTab("https://findyourfood.vercel.app/")
+                        }
+                        className="text-blue-400 text-lg underline cursor-pointer mr-2"
+                      >
+                        findyourfood.vercel.app
+                      </span>
                     </p>
                   </div>
-                  <p className="mt-2">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    finibus est vitae tortor ullamcorper, ut vestibulum velit
-                    convallis. Aenean posuere risus non velit egestas suscipit.
-                  </p>
-                </div>
-                <div className="mb-6">
-                  <div className="flex justify-between flex-wrap gap-2 w-full">
-                    <span className="text-gray-700 font-bold">
-                      Web Developer
+                  <p className="text-gray-100 text-xl pt-2">
+                    Food delivery web app is a dynamic and user-friendly
+                    platform designed to connect users with local restaurants
+                    for quick and convenient food ordering. Key features
+                    include:{" "}
+                    <span className="font-semibold text-pink-400">
+                      Lazy loading, HOC(Higher Order Component), Dark light
+                      mode, Internet connectivity check, Shimmer UI
                     </span>
-                    <p>
-                      <span className="text-gray-700 mr-2">at ABC Company</span>
-                      <span className="text-gray-700">2017 - 2019</span>
-                    </p>
-                  </div>
-                  <p className="mt-2">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    finibus est vitae tortor ullamcorper, ut vestibulum velit
-                    convallis. Aenean posuere risus non velit egestas suscipit.
                   </p>
                 </div>
               </div>
