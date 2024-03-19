@@ -1,7 +1,7 @@
 export const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
 
 export const POPULAR_VIDEO_URL =
-  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=" +
+  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&key=" +
   API_KEY;
 
 export const YOUTUBE_SEARCH_API =

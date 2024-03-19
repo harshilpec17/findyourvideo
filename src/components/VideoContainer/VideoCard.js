@@ -48,10 +48,6 @@ const VideoCard = ({ popularVideo }) => {
               alt="thumbnail"
               className="w-96 h-auto rounded-xl"
             />
-
-            <p className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py">
-              {extractNumber(popularVideo.contentDetails.duration)}
-            </p>
           </div>
 
           <div className="flex flex-row mt-2 gap-2 ">

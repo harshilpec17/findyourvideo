@@ -64,6 +64,12 @@ const Header = () => {
     navigate("/");
   };
 
+  const handleSuggestion = (search) => {
+    setSearchQuery(search);
+    setShowSuggestion(false);
+    console.log(search);
+  };
+
   return (
     <>
       <div className="grid grid-flow-col p-5 shadow-lg items-center bg-[#0F0F0F]">
@@ -88,18 +94,23 @@ const Header = () => {
             </Link>
           </form>
 
-          {searchQuery !== "" && showSuggestion && (
-            <div className="absolute px-3 py-1 z-50 bg-[#222221] col-span-10 w-[31.5rem] outline-none shadow-xl rounded-xl">
-              {searchSuggestion.map((search) => (
-                <li key={search}>
-                  <Link
-                    to={`/results?search_query=${search}`}
-                    className="border-b list-none border-b-zinc-700 py-1 rounded px-1 cursor-pointer text-white hover:bg-zinc-700"
+          {showSuggestion && (
+            <div className=" absolute z-50 px-3 py-1  bg-[#222221] col-span-10 w-[31.5rem] outline-none shadow-xl rounded-xl">
+              <ul>
+                {searchSuggestion.map((search, index) => (
+                  <li
+                    className="border-b text-lg list-none border-b-zinc-700 py-1 rounded px-1 cursor-pointer text-white hover:bg-zinc-700"
+                    key={index}
                   >
-                    {search}
-                  </Link>
-                </li>
-              ))}
+                    <Link
+                      to={"/results?search_query=" + search}
+                      onClick={() => handleSuggestion(search)}
+                    >
+                      {search}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
         </div>
